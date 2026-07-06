@@ -1,0 +1,29 @@
+{
+  "name": "@dogpay/ai-docs",
+  "version": "0.1.0",
+  "description": "DogPay API docs MCP server and AI tool helper.",
+  "type": "module",
+  "homepage": "https://docs.dogpay.com/ai",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wavepaid/dogpay-ai-tools.git",
+    "directory": "npm/dogpay-ai-docs"
+  },
+  "bin": {
+    "dogpay-ai-docs": "./bin/dogpay-ai-docs.js"
+  },
+  "keywords": [
+    "dogpay",
+    "mcp",
+    "payments",
+    "webhooks",
+    "ai-docs"
+  ],
+  "license": "MIT",
+  "engines": {
+    "node": ">=18"
+  },
+  "files": [
+    "bin"
+  ]
+}

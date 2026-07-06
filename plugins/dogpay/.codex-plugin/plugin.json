@@ -1,0 +1,38 @@
+{
+  "name": "dogpay",
+  "version": "0.1.0",
+  "description": "Build DogPay payment, webhook, wallet, card, and virtual-account integrations with Codex.",
+  "author": {
+    "name": "DogPay"
+  },
+  "homepage": "https://docs.dogpay.com/ai",
+  "repository": "https://github.com/wavepaid/dogpay-ai-tools",
+  "license": "MIT",
+  "keywords": [
+    "dogpay",
+    "payments",
+    "crypto",
+    "webhooks",
+    "cards",
+    "virtual-accounts"
+  ],
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "DogPay",
+    "shortDescription": "Integrate DogPay APIs with Codex.",
+    "longDescription": "DogPay helps Codex implement token authentication, hosted crypto checkout, payment webhooks, wallet withdrawals, card issuing, and virtual-account flows using the official DogPay API docs.",
+    "developerName": "DogPay",
+    "category": "Developer",
+    "capabilities": [
+      "Reference",
+      "Write"
+    ],
+    "websiteURL": "https://docs.dogpay.com/ai",
+    "defaultPrompt": [
+      "Add DogPay hosted checkout to this app.",
+      "Implement DogPay webhook signature verification.",
+      "Create a DogPay API client with token caching."
+    ],
+    "brandColor": "#1B6B57"
+  }
+}

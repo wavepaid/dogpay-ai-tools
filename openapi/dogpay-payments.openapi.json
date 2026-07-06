@@ -1,0 +1,564 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "DogPay Payment Gateway",
+    "version": "1.0.0",
+    "description": "DogPay hosted checkout, payment currency configuration, and payment order APIs for AI tool actions."
+  },
+  "servers": [
+    {
+      "url": "https://sandbox-api-v2.dogpay.com",
+      "description": "Sandbox"
+    },
+    {
+      "url": "https://api.dogpay.com",
+      "description": "Production, verify in current DogPay docs before live use"
+    }
+  ],
+  "paths": {
+    "/open-api/v1/auth/access_token": {
+      "post": {
+        "operationId": "getDogPayAccessToken",
+        "summary": "Get DogPay access token",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AccessTokenRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Access token response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AccessTokenResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/open-api/v1/pay/currency-config": {
+      "get": {
+        "operationId": "listDogPayCurrencyConfigs",
+        "summary": "Get payment channel currency configs",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "currency",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "$ref": "#/components/schemas/Currency"
+            }
+          },
+          {
+            "name": "chain",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "$ref": "#/components/schemas/Chain"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Currency configuration list",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CurrencyConfigListResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/open-api/v1/pay": {
+      "post": {
+        "operationId": "createDogPayOrder",
+        "summary": "Create DogPay hosted checkout order",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreatePayOrderRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Created payment order and hosted checkout URL",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreatePayOrderResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "operationId": "listDogPayOrders",
+        "summary": "Get DogPay payment order list",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "number",
+              "default": 1
+            }
+          },
+          {
+            "name": "take",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "number",
+              "default": 10
+            }
+          },
+          {
+            "name": "cursorId",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "orderByCreatedAt",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "asc",
+                "desc"
+              ]
+            }
+          },
+          {
+            "name": "currency",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "$ref": "#/components/schemas/Currency"
+            }
+          },
+          {
+            "name": "callId",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "id",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Payment order list",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PayOrderListResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer"
+      }
+    },
+    "schemas": {
+      "AccessTokenRequest": {
+        "type": "object",
+        "required": [
+          "grant_type",
+          "appid",
+          "secret"
+        ],
+        "properties": {
+          "grant_type": {
+            "type": "string",
+            "enum": [
+              "client_credential"
+            ]
+          },
+          "appid": {
+            "type": "string",
+            "description": "DogPay API Key / AppID"
+          },
+          "secret": {
+            "type": "string",
+            "description": "DogPay API Secret / AppSecret"
+          }
+        }
+      },
+      "AccessTokenResponse": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "number"
+          },
+          "message": {
+            "type": "string"
+          },
+          "timestamp": {
+            "type": "number"
+          },
+          "requestId": {
+            "type": "string"
+          },
+          "data": {
+            "type": "object",
+            "required": [
+              "access_token",
+              "expires_in",
+              "token_type"
+            ],
+            "properties": {
+              "access_token": {
+                "type": "string"
+              },
+              "expires_in": {
+                "type": "number",
+                "description": "Token lifetime in seconds, currently up to 7200"
+              },
+              "token_type": {
+                "type": "string",
+                "default": "bearer"
+              }
+            }
+          }
+        }
+      },
+      "Currency": {
+        "type": "string",
+        "enum": [
+          "USD",
+          "EUR",
+          "USDC",
+          "USDT",
+          "BTC",
+          "ETH",
+          "SOL",
+          "TRX",
+          "DOGE"
+        ]
+      },
+      "Chain": {
+        "type": "string",
+        "enum": [
+          "Ethereum",
+          "EthereumSepolia",
+          "Tron",
+          "Solana",
+          "Base",
+          "Dogecoin",
+          "Arbitrum",
+          "BinanceSmartChain",
+          "Bitcoin",
+          "Polygon"
+        ]
+      },
+      "CurrencyConfigListResponse": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "number"
+          },
+          "message": {
+            "type": "string"
+          },
+          "timestamp": {
+            "type": "number"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CurrencyConfig"
+            }
+          }
+        }
+      },
+      "CurrencyConfig": {
+        "type": "object",
+        "required": [
+          "id",
+          "pay_channel",
+          "currency",
+          "chain",
+          "status"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Pass this value as currencyConfigId when creating an order"
+          },
+          "pay_channel": {
+            "type": "string",
+            "enum": [
+              "pay_001",
+              "pay_002"
+            ]
+          },
+          "currency": {
+            "$ref": "#/components/schemas/Currency"
+          },
+          "chain": {
+            "$ref": "#/components/schemas/Chain"
+          },
+          "token_contract_address": {
+            "type": "string"
+          },
+          "token_explorer_url": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "active",
+              "inactive"
+            ]
+          }
+        }
+      },
+      "CreatePayOrderRequest": {
+        "type": "object",
+        "required": [
+          "orderAmount",
+          "goodsName",
+          "callId",
+          "currencyConfigId"
+        ],
+        "properties": {
+          "orderAmount": {
+            "type": "string",
+            "description": "Order amount as a decimal string. Must be at least 0.02."
+          },
+          "payChannel": {
+            "type": "string",
+            "enum": [
+              "pay_001",
+              "pay_002"
+            ],
+            "default": "pay_002"
+          },
+          "lang": {
+            "type": "string",
+            "enum": [
+              "en",
+              "zh",
+              "zh_Hant",
+              "pt",
+              "es",
+              "fr",
+              "ko",
+              "ja"
+            ]
+          },
+          "allowedCurrencyConfigIds": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "goodsName": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "callId": {
+            "type": "string",
+            "description": "Merchant-generated idempotency key"
+          },
+          "orderExpireTime": {
+            "type": "number",
+            "description": "Order expiration timestamp. Default and maximum are currently one hour."
+          },
+          "currencyConfigId": {
+            "type": "string"
+          },
+          "successUrl": {
+            "type": "string",
+            "format": "uri"
+          },
+          "failureUrl": {
+            "type": "string",
+            "format": "uri"
+          }
+        }
+      },
+      "CreatePayOrderResponse": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "number"
+          },
+          "message": {
+            "type": "string"
+          },
+          "timestamp": {
+            "type": "number"
+          },
+          "data": {
+            "type": "object",
+            "properties": {
+              "transaction": {
+                "$ref": "#/components/schemas/PayTransaction"
+              },
+              "payInfo": {
+                "type": "object",
+                "properties": {
+                  "payUrl": {
+                    "type": "string",
+                    "format": "uri"
+                  },
+                  "expireTime": {
+                    "type": "number"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "PayOrderListResponse": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "number"
+          },
+          "message": {
+            "type": "string"
+          },
+          "timestamp": {
+            "type": "number"
+          },
+          "data": {
+            "type": "object",
+            "properties": {
+              "total": {
+                "type": "number"
+              },
+              "current": {
+                "type": "number"
+              },
+              "list": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/PayTransaction"
+                }
+              }
+            }
+          }
+        }
+      },
+      "PayTransaction": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "idNo": {
+            "type": "string"
+          },
+          "amount": {
+            "type": "number"
+          },
+          "currency": {
+            "$ref": "#/components/schemas/Currency"
+          },
+          "payCurrency": {
+            "$ref": "#/components/schemas/Currency"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "completed",
+              "pending",
+              "failed"
+            ]
+          },
+          "processStatus": {
+            "type": "string",
+            "enum": [
+              "pending",
+              "cancelled",
+              "timeout",
+              "combine_completed"
+            ]
+          },
+          "settleStatus": {
+            "type": "string",
+            "enum": [
+              "unsettled",
+              "settled"
+            ]
+          },
+          "payChannel": {
+            "type": "string"
+          },
+          "callId": {
+            "type": "string"
+          },
+          "payUrl": {
+            "type": "string",
+            "format": "uri"
+          },
+          "transactionAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "completedAt": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      }
+    }
+  }
+}
