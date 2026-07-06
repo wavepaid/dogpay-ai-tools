@@ -1,6 +1,6 @@
 {
   "name": "dogpay",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Build DogPay payment, webhook, wallet, card, and virtual-account integrations with Codex.",
   "author": {
     "name": "DogPay"
