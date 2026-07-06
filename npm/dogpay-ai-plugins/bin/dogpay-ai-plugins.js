@@ -288,6 +288,13 @@ function printTarget(target) {
   }
 
   if (target === "claude") {
+    return [
+      "claude plugin marketplace add wavepaid/dogpay-ai-tools",
+      "claude plugin install dogpay@dogpay"
+    ].join("\n");
+  }
+
+  if (target === "claude-mcp") {
     return "claude mcp add dogpay-ai-plugins -- npx -y @dogpay/dogpay-ai-plugins";
   }
 
@@ -296,7 +303,8 @@ function printTarget(target) {
     "  dogpay-ai-plugins                 Start MCP server over stdio",
     "  dogpay-ai-plugins --print codex   Print Codex install commands",
     "  dogpay-ai-plugins --print cursor  Print Cursor MCP config",
-    "  dogpay-ai-plugins --print claude  Print Claude Code command"
+    "  dogpay-ai-plugins --print claude  Print Claude Code plugin commands",
+    "  dogpay-ai-plugins --print claude-mcp  Print Claude Code MCP command"
   ].join("\n");
 }
 

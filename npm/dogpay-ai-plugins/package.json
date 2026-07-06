@@ -1,7 +1,7 @@
 {
   "name": "@dogpay/dogpay-ai-plugins",
-  "version": "0.1.0",
-  "description": "DogPay AI plugin bundle for MCP clients and Codex setup.",
+  "version": "0.1.1",
+  "description": "DogPay AI plugin bundle for MCP clients, Codex, and Claude Code setup.",
   "type": "module",
   "homepage": "https://docs.dogpay.com",
   "repository": {
@@ -15,6 +15,8 @@
   "keywords": [
     "dogpay",
     "mcp",
+    "claude-code",
+    "codex",
     "payments",
     "webhooks",
     "ai-plugins"

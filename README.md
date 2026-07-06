@@ -6,6 +6,7 @@ This kit implements a DogPay AI-tool setup page with tool-specific install comma
 
 - `plugins/dogpay`: a Codex plugin with a `dogpay-api` skill.
 - `.agents/plugins/marketplace.json`: a Codex marketplace named `dogpay`.
+- `.claude-plugin/marketplace.json`: a Claude Code marketplace named `dogpay`.
 - `npm/dogpay-ai-plugins`: a no-dependency Node MCP server and CLI package scaffold for Claude Code, Cursor, and npx usage.
 - `openapi/dogpay-payments.openapi.json`: a compact OpenAPI file for ChatGPT Actions and other OpenAPI-based tools.
 - `dogpay-ai-setup/index.html`: a static tabbed install page for AI tool setup.
@@ -14,8 +15,9 @@ This kit implements a DogPay AI-tool setup page with tool-specific install comma
 
 DogPay already exposes an AI-readable docs index at `https://docs.dogpay.com/llms.txt`. The install page points each AI tool at a thin integration layer:
 
-- Codex installs `dogpay` from a plugin marketplace.
-- Claude Code and Cursor connect to the `@dogpay/dogpay-ai-plugins` MCP server.
+- Codex installs `dogpay` from a Codex plugin marketplace.
+- Claude Code installs `dogpay` from a Claude plugin marketplace and starts the DogPay MCP server.
+- Cursor connects to the `@dogpay/dogpay-ai-plugins` MCP server.
 - ChatGPT imports the OpenAPI file as an Action.
 - npx prints install snippets or starts the MCP server over stdio.
 
@@ -34,11 +36,25 @@ The MCP server can be smoke-tested with:
 node npm/dogpay-ai-plugins/bin/dogpay-ai-plugins.js --print cursor
 ```
 
+The Claude Code plugin and marketplace can be validated with:
+
+```bash
+claude plugin validate plugins/dogpay
+claude plugin validate .
+```
+
 For public launch, publish the npm package as `@dogpay/dogpay-ai-plugins` and host the Codex marketplace under the public marketplace name `dogpay`; then users install with:
 
 ```bash
 codex plugin marketplace add wavepaid/dogpay-ai-tools
 codex plugin add dogpay@dogpay
+```
+
+Claude Code users install with:
+
+```bash
+claude plugin marketplace add wavepaid/dogpay-ai-tools
+claude plugin install dogpay@dogpay
 ```
 
 ## DogPay API Facts Captured

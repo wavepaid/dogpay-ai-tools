@@ -1,0 +1,11 @@
+{
+  "mcpServers": {
+    "dogpay": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@dogpay/dogpay-ai-plugins"
+      ]
+    }
+  }
+}
