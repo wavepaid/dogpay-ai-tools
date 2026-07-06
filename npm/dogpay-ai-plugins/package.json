@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "description": "DogPay AI plugin bundle for MCP clients and Codex setup.",
   "type": "module",
-  "homepage": "https://docs.dogpay.com/ai",
+  "homepage": "https://docs.dogpay.com",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/wavepaid/dogpay-ai-tools.git",
