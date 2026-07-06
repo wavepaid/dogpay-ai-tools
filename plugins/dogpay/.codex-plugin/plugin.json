@@ -28,6 +28,9 @@
       "Write"
     ],
     "websiteURL": "https://docs.dogpay.com/ai",
+    "composerIcon": "./assets/icon.png",
+    "logo": "./assets/logo.png",
+    "logoDark": "./assets/logo-dark.png",
     "defaultPrompt": [
       "Add DogPay hosted checkout to this app.",
       "Implement DogPay webhook signature verification.",
