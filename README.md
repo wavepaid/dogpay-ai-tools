@@ -41,8 +41,6 @@ codex plugin marketplace add wavepaid/dogpay-ai-tools
 codex plugin add dogpay@dogpay
 ```
 
-See `PUBLISH.md` for the full npm, Codex marketplace, docs-site, and ChatGPT Action release checklist.
-
 ## DogPay API Facts Captured
 
 - Auth: `POST /open-api/v1/auth/access_token` with `grant_type=client_credential`, `appid`, and `secret`.
