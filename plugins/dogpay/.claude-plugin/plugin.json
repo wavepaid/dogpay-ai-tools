@@ -2,7 +2,7 @@
   "name": "dogpay",
   "displayName": "DogPay",
   "description": "Build DogPay payment, webhook, wallet, card, and virtual-account integrations with Claude Code.",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "author": {
     "name": "DogPay"
   },

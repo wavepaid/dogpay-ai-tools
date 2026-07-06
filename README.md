@@ -4,7 +4,7 @@ This kit implements a DogPay AI-tool setup page with tool-specific install comma
 
 ## What Was Built
 
-- `plugins/dogpay`: a Codex plugin with a `dogpay-api` skill.
+- `plugins/dogpay`: a shared Codex and Claude Code plugin with `dogpay-api` and `dogpay-onboarding` skills.
 - `.agents/plugins/marketplace.json`: a Codex marketplace named `dogpay`.
 - `.claude-plugin/marketplace.json`: a Claude Code marketplace named `dogpay`.
 - `npm/dogpay-ai-plugins`: a no-dependency Node MCP server and CLI package scaffold for Claude Code, Cursor, and npx usage.
@@ -16,7 +16,7 @@ This kit implements a DogPay AI-tool setup page with tool-specific install comma
 DogPay already exposes an AI-readable docs index at `https://docs.dogpay.com/llms.txt`. The install page points each AI tool at a thin integration layer:
 
 - Codex installs `dogpay` from a Codex plugin marketplace.
-- Claude Code installs `dogpay` from a Claude plugin marketplace and starts the DogPay MCP server.
+- Claude Code installs `dogpay` from a Claude plugin marketplace, loads the DogPay onboarding/API skills, and starts the DogPay MCP server.
 - Cursor connects to the `@dogpay/dogpay-ai-plugins` MCP server.
 - ChatGPT imports the OpenAPI file as an Action.
 - npx prints install snippets or starts the MCP server over stdio.
@@ -59,6 +59,7 @@ claude plugin install dogpay@dogpay
 
 ## DogPay API Facts Captured
 
+- Registration starts at `https://mp.dogpay.com/sign-up` with business and individual account paths.
 - Auth: `POST /open-api/v1/auth/access_token` with `grant_type=client_credential`, `appid`, and `secret`.
 - Token lifetime: up to 7200 seconds; cache server-side and refresh before expiry.
 - Payment currency config: `GET /open-api/v1/pay/currency-config`.

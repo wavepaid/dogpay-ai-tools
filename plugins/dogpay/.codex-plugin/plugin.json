@@ -1,6 +1,6 @@
 {
   "name": "dogpay",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Build DogPay payment, webhook, wallet, card, and virtual-account integrations with Codex.",
   "author": {
     "name": "DogPay"
@@ -32,6 +32,7 @@
     "logo": "./assets/logo.png",
     "logoDark": "./assets/logo-dark.png",
     "defaultPrompt": [
+      "Guide me through DogPay registration and setup.",
       "Add DogPay hosted checkout to this app.",
       "Implement DogPay webhook signature verification.",
       "Create a DogPay API client with token caching."
