@@ -2,7 +2,7 @@
 
 这套东西分三条线发布：
 
-1. `@dogpay/ai-docs` npm 包：给 Claude Code、Cursor、Skills(npx) 用。
+1. `@dogpay/dogpay-ai-plugins` npm 包：给 Claude Code、Cursor、Skills(npx) 用。
 2. Codex plugin marketplace：给 Codex 插件安装用。
 3. `dogpay-ai-setup/index.html`：放到 DogPay 文档站或官网。
 
@@ -11,7 +11,7 @@
 目录：
 
 ```bash
-npm/dogpay-ai-docs
+npm/dogpay-ai-plugins
 ```
 
 发布前已设置，发布前可按 DogPay 法务/仓库实际情况调整：
@@ -24,7 +24,7 @@ npm/dogpay-ai-docs
 发布命令：
 
 ```bash
-cd npm/dogpay-ai-docs
+cd npm/dogpay-ai-plugins
 npm login
 npm publish --access public
 ```
@@ -32,8 +32,8 @@ npm publish --access public
 验证：
 
 ```bash
-npx -y @dogpay/ai-docs --print cursor
-npx -y @dogpay/ai-docs --print claude
+npx -y @dogpay/dogpay-ai-plugins --print cursor
+npx -y @dogpay/dogpay-ai-plugins --print claude
 ```
 
 ## 2. 发布 Codex marketplace
@@ -160,7 +160,7 @@ codex plugin add dogpay@dogpay
 再测试 MCP：
 
 ```bash
-npx -y @dogpay/ai-docs --print cursor
+npx -y @dogpay/dogpay-ai-plugins --print cursor
 ```
 
 最后检查 docs 页面上每个 tab 的复制命令是否与正式发布源一致。

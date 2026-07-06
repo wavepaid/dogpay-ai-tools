@@ -281,22 +281,22 @@ function printTarget(target) {
       mcpServers: {
         dogpay: {
           command: "npx",
-          args: ["-y", "@dogpay/ai-docs"]
+          args: ["-y", "@dogpay/dogpay-ai-plugins"]
         }
       }
     }, null, 2);
   }
 
   if (target === "claude") {
-    return "claude mcp add dogpay-docs -- npx -y @dogpay/ai-docs";
+    return "claude mcp add dogpay-ai-plugins -- npx -y @dogpay/dogpay-ai-plugins";
   }
 
   return [
     "Usage:",
-    "  dogpay-ai-docs                 Start MCP server over stdio",
-    "  dogpay-ai-docs --print codex   Print Codex install commands",
-    "  dogpay-ai-docs --print cursor  Print Cursor MCP config",
-    "  dogpay-ai-docs --print claude  Print Claude Code command"
+    "  dogpay-ai-plugins                 Start MCP server over stdio",
+    "  dogpay-ai-plugins --print codex   Print Codex install commands",
+    "  dogpay-ai-plugins --print cursor  Print Cursor MCP config",
+    "  dogpay-ai-plugins --print claude  Print Claude Code command"
   ].join("\n");
 }
 
@@ -342,7 +342,7 @@ function handleMessage(message) {
           tools: {}
         },
         serverInfo: {
-          name: "dogpay-ai-docs",
+          name: "dogpay-ai-plugins",
           version: "0.1.0"
         }
       });
